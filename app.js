@@ -10,10 +10,66 @@ const shopItems = [
 
 // Sample ticket options with images
 const ticketOptions = [
-    { id: 3, name: "Standard Ticket", price: 15, image: "https://i.ibb.co/BVn6wNMM/ticket.png" },
+    { id: 3, name: "Standaard Ticket", price: 15, image: "https://i.ibb.co/BVn6wNMM/ticket.png" },
 ];
 
 let cart = JSON.parse(localStorage.getItem("cart")) || [];
+
+// Function to show "Added to Cart" message
+function showAddedMessage(itemName) {
+    const message = document.createElement("div");
+    message.className = "added-message";
+    message.innerText = `✔️ Added ${itemName} to cart`;
+    
+    document.body.appendChild(message);
+    
+    // Remove message after 2 seconds
+    setTimeout(() => {
+        message.remove();
+    }, 2000);
+}
+
+// Add items to cart with notification
+function addToCart(id, type) {
+    const item = type === "merch" ? shopItems.find(i => i.id === id) : ticketOptions.find(i => i.id === id);
+    
+    if (item) {
+        cart.push(item);
+        localStorage.setItem("cart", JSON.stringify(cart));
+        showAddedMessage(item.name);
+        updateCart();
+    }
+}
+
+// Update cart display
+function updateCart() {
+    const cartDiv = document.getElementById("cart-items");
+    const totalElement = document.getElementById("total");
+    if (!cartDiv || !totalElement) return;
+
+    cartDiv.innerHTML = cart.length ? "" : "<p>Your cart is empty.</p>";
+
+    let total = 0;
+    cart.forEach((item, index) => {
+        total += item.price;
+        cartDiv.innerHTML += `<li>${item.name} - €${item.price} 
+        <button onclick="removeFromCart(${index})">Remove</button></li>`;
+    });
+
+    totalElement.innerText = `Total: €${total}`;
+}
+
+// Remove item from cart
+function removeFromCart(index) {
+    cart.splice(index, 1);
+    localStorage.setItem("cart", JSON.stringify(cart));
+    updateCart();
+}
+
+// Load cart & theme on page load
+document.addEventListener("DOMContentLoaded", () => {
+    updateCart();
+});
 
 // Display merchandise in shop
 function displayShop() {
@@ -52,39 +108,6 @@ function displayTickets() {
     });
 }
 
-// Add items to the cart
-function addToCart(id, type) {
-    const item = type === "merch" ? shopItems.find(i => i.id === id) : ticketOptions.find(i => i.id === id);
-    cart.push(item);
-    localStorage.setItem("cart", JSON.stringify(cart));
-    updateCart();
-}
-
-// Update the cart display
-function updateCart() {
-    const cartItemsContainer = document.getElementById("cart-items");
-    if (!cartItemsContainer) return;
-    cartItemsContainer.innerHTML = cart.length > 0 ? "" : "<p>Your cart is empty.</p>";
-
-    cart.forEach((item, index) => {
-        const listItem = document.createElement("li");
-        listItem.innerHTML = `${item.name} - €${item.price} 
-        <button onclick="removeFromCart(${index})">Remove</button>`;
-        cartItemsContainer.appendChild(listItem);
-    });
-
-    // Update the total price
-    const totalPrice = cart.reduce((total, item) => total + item.price, 0);
-    document.getElementById("total").textContent = `Total: €${totalPrice}`;
-}
-
-// Remove items from cart
-function removeFromCart(index) {
-    cart.splice(index, 1);
-    localStorage.setItem("cart", JSON.stringify(cart));
-    updateCart();
-}
-
 // Placeholder checkout function
 function checkout() {
     if (cart.length > 0) {
@@ -104,3 +127,4 @@ document.addEventListener("DOMContentLoaded", () => {
     const savedTheme = localStorage.getItem("theme") || "dark";
     switchTheme(savedTheme);
 });
+
