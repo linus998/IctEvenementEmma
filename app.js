@@ -1,12 +1,16 @@
-// Sample store items
+// Sample store items with multiple images
 const shopItems = [
-    { id: 1, name: "90s T-Shirt", price: 20 },
-    { id: 2, name: "Retro Hat", price: 15 }
+    { 
+        id: 1, 
+        name: "90s T-Shirt", 
+        price: 20, 
+        images: ["https://i.ibb.co/Jw4rwwkR/tshirt-voorkant.png", "https://i.ibb.co/ZqN4K93/achterkant-tshirt.png"] // Multiple images
+    },
 ];
 
+// Sample ticket options with images
 const ticketOptions = [
-    { id: 3, name: "General Admission", price: 25 },
-    { id: 4, name: "VIP Ticket", price: 50 }
+    { id: 3, name: "Standard Ticket", price: 15, image: "https://i.ibb.co/BVn6wNMM/ticket.png" },
 ];
 
 let cart = JSON.parse(localStorage.getItem("cart")) || [];
@@ -17,8 +21,19 @@ function displayShop() {
     if (!shopDiv) return;
     shopDiv.innerHTML = "";
     shopItems.forEach(item => {
-        shopDiv.innerHTML += `<p>${item.name} - €${item.price} 
-        <button onclick="addToCart(${item.id}, 'merch')">Add to Cart</button></p>`;
+        let imagesHtml = "";
+        item.images.forEach((image, index) => {
+            imagesHtml += `
+                <img src="${image}" alt="${item.name} ${index + 1}" class="item-image">
+            `;
+        });
+
+        shopDiv.innerHTML += `
+            <div class="shop-item">
+                <div class="item-images">${imagesHtml}</div> <!-- Display all item images -->
+                <p>${item.name} - €${item.price}</p>
+                <button onclick="addToCart(${item.id}, 'merch')">Add to Cart</button>
+            </div>`;
     });
 }
 
@@ -28,8 +43,12 @@ function displayTickets() {
     if (!ticketDiv) return;
     ticketDiv.innerHTML = "";
     ticketOptions.forEach(ticket => {
-        ticketDiv.innerHTML += `<p>${ticket.name} - €${ticket.price} 
-        <button onclick="addToCart(${ticket.id}, 'ticket')">Add to Cart</button></p>`;
+        ticketDiv.innerHTML += `
+            <div class="ticket-option">
+                <img src="${ticket.image}" alt="${ticket.name}" class="ticket-image">
+                <p>${ticket.name} - €${ticket.price}</p>
+                <button onclick="addToCart(${ticket.id}, 'ticket')">Add to Cart</button>
+            </div>`;
     });
 }
 
