@@ -2,20 +2,128 @@ body {
     background-color: #121212;
     color: #00ffff;
     font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
 }
+
 header {
     background-color: #222;
     padding: 15px;
     text-align: center;
+    border-bottom: 3px solid #00ffff;
 }
+
+nav {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
 nav a {
     color: #00ffcc;
     margin: 10px;
     text-decoration: none;
+    font-size: 18px;
+    padding: 8px 15px;
+    border-radius: 8px;
+    transition: background 0.3s ease-in-out;
 }
-.btn {
+
+nav a:hover {
+    background: rgba(0, 255, 204, 0.2);
+}
+
+.container {
+    width: 90%;
+    max-width: 1200px;
+    margin: auto;
+    padding: 20px;
+}
+
+/* Shop & Ticket Items Layout */
+.grid-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 20px;
+    justify-content: center;
+}
+
+.shop-item, .ticket-option {
+    background-color: #1a1a1a;
+    padding: 15px;
+    border-radius: 12px;
+    box-shadow: 0px 4px 8px rgba(0, 255, 255, 0.2);
+    text-align: center;
+    transition: transform 0.2s ease-in-out, box-shadow 0.3s ease-in-out;
+}
+
+.shop-item:hover, .ticket-option:hover {
+    transform: translateY(-5px);
+    box-shadow: 0px 6px 12px rgba(0, 255, 255, 0.3);
+}
+
+/* Item Images */
+.item-images {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    padding-bottom: 10px;
+}
+
+.item-image, .ticket-image {
+    width: 100%;
+    max-width: 180px;
+    height: auto;
+    border-radius: 12px;
+    box-shadow: 0px 3px 6px rgba(255, 255, 255, 0.1);
+    transition: transform 0.2s ease-in-out;
+}
+
+.item-image:hover, .ticket-image:hover {
+    transform: scale(1.05);
+}
+
+/* Buttons */
+button {
     background-color: #ff00ff;
-    padding: 10px;
+    padding: 10px 15px;
     color: white;
-    border-radius: 5px;
+    border-radius: 10px;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background 0.3s ease-in-out;
+}
+
+button:hover {
+    background-color: #cc00cc;
+}
+
+/* Cart Layout */
+.cart-container {
+    background-color: #1a1a1a;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0px 4px 8px rgba(255, 0, 255, 0.2);
+    text-align: center;
+    margin-top: 20px;
+}
+
+#cart-items {
+    list-style: none;
+    padding: 0;
+}
+
+#cart-items li {
+    padding: 10px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+#cart-items li:last-child {
+    border-bottom: none;
+}
+
+#total {
+    font-size: 18px;
+    font-weight: bold;
+    margin-top: 10px;
 }
