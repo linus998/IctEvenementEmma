@@ -1,44 +1,42 @@
 body {
-    background-color: #ffcc66; /* Soft background color */
-    color: #003366; /* Dark text color for contrast */
+    background-color: #e6e6fa; /* Light lavender background */
+    color: #4b0082; /* Indigo text color */
     font-family: 'Verdana', sans-serif;
-    margin: 0; /* Remove default margin */
-    padding: 0; /* Remove default padding */
 }
 
 header {
-    background: linear-gradient(to right, #ff6600, #33cc33); /* Gradient header */
-    padding: 20px; /* Increased padding for a more spacious look */
+    background: linear-gradient(to right, #800080, #ffcc00); /* Purple to yellow gradient */
+    padding: 20px;
     text-align: center;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Subtle shadow for depth */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
 nav {
-    margin: 20px 0; /* Space around navigation */
+    margin: 20px 0;
 }
 
 nav a {
-    color: #003366; /* Link color */
+    color: #4b0082; /* Indigo link color */
     margin: 10px;
     text-decoration: none;
-    font-weight: bold; /* Bold links for emphasis */
-    transition: color 0.3s; /* Smooth color transition */
+    font-weight: bold;
+    transition: color 0.3s;
 }
 
 nav a:hover {
-    color: #ff6600; /* Change color on hover */
+    color: #ffcc00; /* Yellow on hover */
 }
 
 .btn {
-    background-color: #ff0000; /* Button color */
-    padding: 12px 20px; /* More padding for a better button size */
-    color: white; /* Text color */
-    border-radius: 5px; /* Rounded corners */
-    border: none; /* No border */
-    cursor: pointer; /* Pointer cursor on hover */
-    transition: background-color 0.3s; /* Smooth background transition */
+    background-color: #ff1493; /* Deep pink button color */
+    padding: 12px 20px;
+    color: white;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s;
 }
 
 .btn:hover {
-    background-color: #cc0000; /* Darker red on hover */
+    background-color: #c71585; /* Darker pink on hover */
 }
