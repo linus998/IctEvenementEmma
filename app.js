@@ -17,18 +17,18 @@ function displayShop() {
     if (!shopDiv) return;
     shopDiv.innerHTML = "";
     shopItems.forEach(item => {
-        shopDiv.innerHTML += `<p>${item.name} - $${item.price} 
+        shopDiv.innerHTML += `<p>${item.name} - €${item.price} 
         <button onclick="addToCart(${item.id}, 'merch')">Add to Cart</button></p>`;
     });
 }
 
 // Display tickets in ticket page
 function displayTickets() {
-    const ticketDiv = document.getElementById("ticket-list");
+    const ticketDiv = document.getElementById("ticket-options");
     if (!ticketDiv) return;
     ticketDiv.innerHTML = "";
     ticketOptions.forEach(ticket => {
-        ticketDiv.innerHTML += `<p>${ticket.name} - $${ticket.price} 
+        ticketDiv.innerHTML += `<p>${ticket.name} - €${ticket.price} 
         <button onclick="addToCart(${ticket.id}, 'ticket')">Add to Cart</button></p>`;
     });
 }
@@ -43,14 +43,20 @@ function addToCart(id, type) {
 
 // Update the cart display
 function updateCart() {
-    const cartDiv = document.getElementById("cart");
-    if (!cartDiv) return;
-    cartDiv.innerHTML = cart.length > 0 ? "" : "<p>Your cart is empty.</p>";
+    const cartItemsContainer = document.getElementById("cart-items");
+    if (!cartItemsContainer) return;
+    cartItemsContainer.innerHTML = cart.length > 0 ? "" : "<p>Your cart is empty.</p>";
 
     cart.forEach((item, index) => {
-        cartDiv.innerHTML += `<p>${item.name} - $${item.price} 
-        <button onclick="removeFromCart(${index})">Remove</button></p>`;
+        const listItem = document.createElement("li");
+        listItem.innerHTML = `${item.name} - €${item.price} 
+        <button onclick="removeFromCart(${index})">Remove</button>`;
+        cartItemsContainer.appendChild(listItem);
     });
+
+    // Update the total price
+    const totalPrice = cart.reduce((total, item) => total + item.price, 0);
+    document.getElementById("total").textContent = `Total: €${totalPrice}`;
 }
 
 // Remove items from cart
@@ -60,17 +66,21 @@ function removeFromCart(index) {
     updateCart();
 }
 
-// Handle theme switching
-function switchTheme(theme) {
-    document.getElementById("theme-stylesheet").href = `styles-${theme}.css`;
-    localStorage.setItem("theme", theme);
+// Placeholder checkout function
+function checkout() {
+    if (cart.length > 0) {
+        alert("Proceeding to checkout with PayPal.");
+        // Add logic for payment processing or redirect to payment page
+    } else {
+        alert("Your cart is empty!");
+    }
 }
 
 // Load cart & theme on page load
 document.addEventListener("DOMContentLoaded", () => {
     if (document.getElementById("shop-items")) displayShop();
-    if (document.getElementById("ticket-list")) displayTickets();
-    if (document.getElementById("cart")) updateCart();
+    if (document.getElementById("ticket-options")) displayTickets();
+    if (document.getElementById("cart-items")) updateCart();
 
     const savedTheme = localStorage.getItem("theme") || "dark";
     switchTheme(savedTheme);
