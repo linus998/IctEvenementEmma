@@ -1,0 +1,10 @@
+/90s-party-website
+│── index.html       # Home page
+│── shop.html        # Merchandise page
+│── tickets.html     # Tickets page
+│── cart.html        # Shopping cart
+│── styles-dark.css  # Dark (Cyberpunk/Vaporwave)
+│── styles-neon.css  # Neon (Arcade/Synthwave)
+│── styles-retro.css # Retro Bright (90s Pop Aesthetic)
+│── app.js           # Handles cart & interactions
+│── assets/          # Folder for images, logos, etc.
